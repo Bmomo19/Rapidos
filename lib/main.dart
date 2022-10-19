@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rapidos/Pages/Auth/login.dart';
-import 'package:rapidos/Pages/Register/firststep.dart';
 import 'package:rapidos/Routes/route.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rapidos/Theme/colors.dart';
@@ -20,11 +19,9 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.robotoTextTheme(
           Theme.of(context).textTheme,
         ),
-        //  Theme.of(context).textTheme,
       ),
       color: colorPrimaryBlue,
-      // Login()
-      home: const FirstStep(),
+      home: const Login(),
       debugShowCheckedModeBanner: false,
       routes: PageRoutes().routes(),
     );

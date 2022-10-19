@@ -28,7 +28,7 @@ class _LoginState extends State<Login> {
   void initState() {
     backendService = BackendService(
       InterceptedClient.build(interceptors: [
-        WeatherApiInterceptor(context: context),
+        RapidosApiInterceptor(context: context),
       ]),
     );
     super.initState();
@@ -49,12 +49,12 @@ class _LoginState extends State<Login> {
       body: ListView(
         children: [
           Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const SizedBox(height: 30),
                     Image.asset(
@@ -83,166 +83,22 @@ class _LoginState extends State<Login> {
                                   style: TextStyle(color: Colors.red),
                                 ),
                               // Login N° TELEPHONE
-                              Card(
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(15.0),
-                                          bottomLeft: Radius.circular(15.0),
-                                        ),
-                                        color: Colors.grey.shade300,
-                                      ),
-                                      width:
-                                          MediaQuery.of(context).size.width / 7,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              13,
-                                      child: const Icon(Icons.phone),
-                                    ),
-                                    Expanded(
-                                      child: TextFormField(
-                                        keyboardType: TextInputType.phone,
-                                        controller: telephone,
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            valueEmpty = true;
-                                            return null;
-                                          }
-                                          return null;
-                                        },
-                                        decoration: InputDecoration(
-                                          suffixIcon: valueEmpty
-                                              ? const Icon(
-                                                  Icons.warning,
-                                                  color: Colors.red,
-                                                )
-                                              : const Text(""),
-                                          hintText: "Numéro de téléphone",
-                                          hintStyle:
-                                              const TextStyle(fontSize: 14.0),
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                            borderSide: BorderSide.none,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 7),
-                              // Login Mot de Passe
-                              Card(
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(15.0),
-                                          bottomLeft: Radius.circular(15.0),
-                                        ),
-                                        color: Colors.grey.shade300,
-                                      ),
-                                      width:
-                                          MediaQuery.of(context).size.width / 7,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              13,
-                                      child: const Icon(Icons.lock),
-                                    ),
-                                    Expanded(
-                                      child: TextFormField(
-                                        obscureText: true,
-                                        controller: password,
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            valueEmpty = true;
-                                            return null;
-                                          }
-                                          return null;
-                                        },
-                                        decoration: InputDecoration(
-                                          suffixIcon: valueEmpty
-                                              ? const Icon(
-                                                  Icons.warning,
-                                                  color: Colors.red,
-                                                )
-                                              : const Text(""),
-                                          hintText: "Mot de passe",
-                                          hintStyle:
-                                              const TextStyle(fontSize: 14.0),
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                            borderSide: BorderSide.none,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 15),
-                              // Se connecter
-                              GestureDetector(
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / 14,
                                 child: Card(
                                   elevation: 5,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(15.0),
                                   ),
                                   child: Row(
                                     children: [
-                                      Expanded(
-                                        child: GestureDetector(
-                                          onTap: formState,
-                                          child: Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                13,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(15.0),
-                                                bottomLeft:
-                                                    Radius.circular(15.0),
-                                              ),
-                                              color: colorPrimaryBlue,
-                                            ),
-                                            child: const Center(
-                                              child: Text(
-                                                "Se connecter",
-                                                style: TextStyle(
-                                                  fontSize: 15.0,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
                                       Container(
                                         decoration: BoxDecoration(
                                           borderRadius: const BorderRadius.only(
-                                            topRight: Radius.circular(15.0),
-                                            bottomRight: Radius.circular(15.0),
+                                            topLeft: Radius.circular(15.0),
+                                            bottomLeft: Radius.circular(15.0),
                                           ),
-                                          color: colorPrimary,
+                                          color: Colors.grey.shade300,
                                         ),
                                         width:
                                             MediaQuery.of(context).size.width /
@@ -250,9 +106,170 @@ class _LoginState extends State<Login> {
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 13,
-                                        child: const Icon(Icons.arrow_forward),
+                                        child: const Icon(Icons.phone),
+                                      ),
+                                      Expanded(
+                                        child: TextFormField(
+                                          keyboardType: TextInputType.phone,
+                                          controller: telephone,
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              valueEmpty = true;
+                                              return null;
+                                            }
+                                            return null;
+                                          },
+                                          decoration: InputDecoration(
+                                            suffixIcon: valueEmpty
+                                                ? const Icon(
+                                                    Icons.warning,
+                                                    color: Colors.red,
+                                                  )
+                                                : const Text(""),
+                                            hintText: "Numéro de téléphone",
+                                            hintStyle:
+                                                const TextStyle(fontSize: 14.0),
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
+                                              borderSide: BorderSide.none,
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 7),
+                              // Login Mot de Passe
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / 14,
+                                child: Card(
+                                  elevation: 5,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(15.0),
+                                            bottomLeft: Radius.circular(15.0),
+                                          ),
+                                          color: Colors.grey.shade300,
+                                        ),
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                7,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                13,
+                                        child: const Icon(Icons.lock),
+                                      ),
+                                      Expanded(
+                                        child: TextFormField(
+                                          obscureText: true,
+                                          controller: password,
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              valueEmpty = true;
+                                              return null;
+                                            }
+                                            return null;
+                                          },
+                                          decoration: InputDecoration(
+                                            suffixIcon: valueEmpty
+                                                ? const Icon(
+                                                    Icons.warning,
+                                                    color: Colors.red,
+                                                  )
+                                                : const Text(""),
+                                            hintText: "Mot de passe",
+                                            hintStyle:
+                                                const TextStyle(fontSize: 14.0),
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
+                                              borderSide: BorderSide.none,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 15),
+                              // Se connecter
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / 14,
+                                child: GestureDetector(
+                                  child: Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: GestureDetector(
+                                            onTap: formState,
+                                            child: Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  13,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft:
+                                                      Radius.circular(15.0),
+                                                  bottomLeft:
+                                                      Radius.circular(15.0),
+                                                ),
+                                                color: colorPrimaryBlue,
+                                              ),
+                                              child: const Center(
+                                                child: Text(
+                                                  "Se connecter",
+                                                  style: TextStyle(
+                                                    fontSize: 15.0,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topRight: Radius.circular(15.0),
+                                              bottomRight:
+                                                  Radius.circular(15.0),
+                                            ),
+                                            color: colorPrimary,
+                                          ),
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              7,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              13,
+                                          child:
+                                              const Icon(Icons.arrow_forward),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -276,11 +293,11 @@ class _LoginState extends State<Login> {
                           ),
                         )
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height / 5.5),
+              SizedBox(height: MediaQuery.of(context).size.height / 4),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -290,8 +307,8 @@ class _LoginState extends State<Login> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // ignore: avoid_print
-                      print("Créer un compte");
+                      const BoxUtils()
+                          .Navigate(context, PageRoutes.paysderesidence);
                     },
                     child: Text(
                       " Créez un compte",

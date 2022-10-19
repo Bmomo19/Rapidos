@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 
-class WeatherApiInterceptor implements InterceptorContract {
+class RapidosApiInterceptor implements InterceptorContract {
   BuildContext? context;
-  WeatherApiInterceptor({this.context});
+  RapidosApiInterceptor({this.context});
 
   @override
   Future<RequestData> interceptRequest({required RequestData data}) async {

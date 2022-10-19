@@ -30,7 +30,9 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   http_interceptor: ^1.0.2
-  google_fonts:
+  camera: ^0.8.1+5
+  image_picker: ^0.7.4
+  google_fonts: ^3.0.1
   flutter:
     sdk: flutter
 
