@@ -265,8 +265,10 @@ class _LoginState extends State<Login> {
                                                   .size
                                                   .height /
                                               13,
-                                          child:
-                                              const Icon(Icons.arrow_forward),
+                                          child: const Icon(
+                                            Icons.arrow_forward,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -297,7 +299,7 @@ class _LoginState extends State<Login> {
                   ],
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height / 4),
+              SizedBox(height: MediaQuery.of(context).size.height / 5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
